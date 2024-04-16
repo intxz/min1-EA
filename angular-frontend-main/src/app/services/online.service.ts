@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 @Injectable({
     providedIn: 'root'
   })
-  export class UserService {
+  export class OnlineService {
     token: string | null = null;
     newURL: string = '';
   
@@ -25,5 +25,15 @@ import { AuthService } from './auth.service';
       return headers;
     }
 
-    
+    getState(findState : string){
+        return this.http.get<IOnline>(this.url+'/state/'+findState, { headers: this.getHeaders() });
+    }
+
+    deleteState(deleteStateId : string) {
+        return this.http.delete(this.url+'/state/'+ deleteStateId, { headers: this.getHeaders() });
+    }
+
+    updateState(editState : IOnline) {
+        return this.http.put<IOnline>(this.url+'/state/'+ editState._id, editState.name_users, { headers: this.getHeaders() });
+    }
   }

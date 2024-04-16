@@ -1,0 +1,55 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchBarPlaceString">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" (click)="searchForPlace()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-auto">
+        @if(createMode==true) {
+            <div>
+                <h1>{{ createMode ? 'Create' : 'Edit' }} State</h1>
+                <form [formGroup]="placeForm" (submit)="onSubmit()">
+                    <div>
+                        <label for="name">Id: </label>
+                        <input type="text" id="name" formControlName="name" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+        }
+        @else if (editMode==true) {
+            <div>
+                <h1>{{ createMode ? 'Create' : 'Edit' }} State</h1>
+                <form [formGroup]="placeForm" (submit)="submitState()">
+                    <div>
+                        <label for="name">Id: </label>
+                        <input type="text" id="name" formControlName="name" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+    <section>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <span class="col-md-auto">
+                    @if(searchOnlineMode==true && searchedOnline && editMode==false && createMode==false){
+                        <div>
+                            <p>Id: {{searchedOnline.name_users}}</p>
+                            <span style="margin-right: 10px;"></span>
+                            <button class="btn btn-primary" type="button" (click)="deactivateState()">Deactivate State</button>
+                        </span>
+                        </div>
+                        
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
